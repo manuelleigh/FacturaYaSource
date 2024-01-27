@@ -6,7 +6,7 @@
             <div class="card card-primary">
                 <div class="card-header">
                     <div>
-                        <h4 class="card-title">Consulta kardex</h4>
+                        <h4 class="card-title">Consulta kardex - Productos</h4>
                     </div>
                 </div>
                 <div class="card-body">

@@ -1752,6 +1752,7 @@ export default {
             customer_addresses: [],
             payment_destinations: [],
             form_cash_document: {},
+            document: {},
             enabled_payments: true,
             readonly_date_of_due: false,
             seller_class: 'col-lg-6 pb-2',
@@ -1825,6 +1826,7 @@ export default {
         this.loadConfiguration()
         this.$store.commit('setConfiguration', this.configuration)
         await this.initForm()
+        // await this.getNote()
         await this.$http.get(`/${this.resource}/tables`)
             .then(response => {
                 this.document_types = response.data.document_types_invoice;
@@ -3297,6 +3299,9 @@ export default {
             this.cleanCustomer();
             this.filterCustomers();
             this.setDefaultSerieByDocument()
+            this.form.note_credit_or_debit_type_id = null
+            this.form.note_description = null
+            // this.form.affected_document_id = this.document.id
         },
         cleanCustomer() {
             this.form.customer_id = null
@@ -3308,6 +3313,18 @@ export default {
             this.dateValid = false
 
         },
+        // async getNote() {
+        //     this.loading = true
+        //     await this.$http.get(`/${this.resource}/note/record/${this.form.affected_document_id}`)
+        //         .then(response => {
+        //             // console.log(response)
+        //             this.document = response.data
+        //             // this.getHasDocuments()
+        //         })
+        //         .then(() => {
+        //             this.loading = false
+        //         })
+        // },
         validateDateOfIssue() {
 
             let minDate = moment().subtract(this.configuration.shipping_time_days, 'days')

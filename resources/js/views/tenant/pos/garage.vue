@@ -13,7 +13,7 @@
                 @success="handleFn115"/>
             <!-- F4 -->
 
-            <div class="col-md-4">
+            <!-- <div class="col-md-4">
                 <h2>
                     <el-switch
                         v-model="search_item_by_barcode"
@@ -21,7 +21,7 @@
                         @change="changeSearchItemBarcode"
                     ></el-switch>
                 </h2>
-            </div>
+            </div> -->
             <div class="col-md-4">
                 <h2>
                     <el-tooltip
@@ -830,7 +830,7 @@ export default {
 
     data() {
         return {
-            place: "cat",
+            place: "cat3",
             showDialogItemUnitTypes: false,
             history_item_id: null,
             search_item_by_barcode: false,
@@ -873,7 +873,7 @@ export default {
     },
     async created() {
         this.loadConfiguration()
-
+        
         this.show_fast_payment_garage = false
         await this.initForm();
         await this.getTables();
@@ -1668,12 +1668,12 @@ export default {
 
             // console.log("pos", this.row);
 
-            this.$notify({
-                title: "",
-                message: "Producto añadido!",
-                type: "success",
-                duration: 700
-            });
+            // this.$notify({
+            //     title: "",
+            //     message: "Producto añadido!",
+            //     type: "success",
+            //     duration: 700
+            // });
 
             this.cleanInput();
 
@@ -2001,7 +2001,7 @@ export default {
         },
         back() {
             this.all_items = [];
-            this.place = "cat";
+            this.place = "cat3";
             this.loading = false;
         },
         async setView(view) {

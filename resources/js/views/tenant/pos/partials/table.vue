@@ -20,8 +20,8 @@
             <el-table-column type="index" width="50"> </el-table-column>
             <el-table-column property="description" label="Nombre" width="180">
             </el-table-column>
-            <el-table-column property="internal_id" label="Código" width="120">
-            </el-table-column>
+            <!-- <el-table-column property="internal_id" label="Código" width="120" style="display: none;">
+            </el-table-column> -->
             <el-table-column property="brand" label="Marca" width="120">
                 <!-- <template slot-scope="{ row }">
                     {{ row }}
@@ -35,12 +35,12 @@
                 </template>
             </el-table-column>
 
-            <el-table-column label="Pack" width="120">
+            <!-- <el-table-column label="Pack" width="120">
                 <template slot-scope="{ row }">
                     <br />
                     <small> {{ row.sets.join("-") }} </small>
                 </template>
-            </el-table-column>
+            </el-table-column> -->
             <el-table-column label="Stock">
                 <template slot-scope="{ row }">
                     <!-- <button type="button" class="btn btn-xs btn-primary-pos" @click="clickWarehouseDetail(row)">
@@ -73,7 +73,7 @@
                 </template>
             </el-table-column>
 
-            <el-table-column label="Lista precios" width="120">
+            <!-- <el-table-column label="Lista precios" width="120">
                 <template slot-scope="{ row }"> 
                     <template v-if="row.unit_type.length > 0">
                         <el-popover
@@ -161,10 +161,10 @@
                         </el-popover> 
                     </template>
                 </template>
-            </el-table-column>
+            </el-table-column> -->
 
 
-            <el-table-column label="Historial ventas">
+            <!-- <el-table-column label="Historial ventas">
                 <template slot-scope="{ row }">
                     <button
                         type="button"
@@ -174,7 +174,7 @@
                         <i class="fa fa-list"></i>
                     </button>
                 </template>
-            </el-table-column>
+            </el-table-column> -->
 
             <!-- <el-table-column label="Historial compras">
                     <template slot-scope="{row}">

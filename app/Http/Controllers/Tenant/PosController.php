@@ -67,22 +67,41 @@ class PosController extends Controller
         $establishment_id = auth()->user()->establishment_id;
         $warehouse = Warehouse::where('establishment_id', $establishment_id)->first();
 
-        $items_query = Item::where('description', 'like', "%{$request->input_item}%")
-            // ->orWhere('internal_id','like', "%{$request->input_item}%")
-            ->with(['warehouse_prices' => function ($q) use ($warehouse) {
-                $q->where('warehouse_id', $warehouse->id);
-            }])
-            ->orWhere(function ($query) use ($request) {
-                $query->where('internal_id', 'like', "%{$request->input_item}%")
-                    ->orWhere('barcode', "{$request->input_item}");
-            })
-            ->orWhereHas('category', function ($query) use ($request) {
-                $query->where('name', 'like', '%' . $request->input_item . '%');
-            })
-            ->orWhereHas('brand', function ($query) use ($request) {
-                $query->where('name', 'like', '%' . $request->input_item . '%');
-            })
-            ->whereWarehouse();
+        // $items_query = Item::where('description', 'like', "%{$request->input_item}%")
+        //     // ->orWhere('internal_id','like', "%{$request->input_item}%")
+        //     ->with(['warehouse_prices' => function ($q) use ($warehouse) {
+        //         $q->where('warehouse_id', $warehouse->id);
+        //     }])
+        //     ->orWhere(function ($query) use ($request) {
+        //         $query->where('internal_id', 'like', "%{$request->input_item}%")
+        //             ->orWhere('barcode', "{$request->input_item}");
+        //     })
+        //     ->orWhereHas('category', function ($query) use ($request) {
+        //         $query->where('name', 'like', '%' . $request->input_item . '%');
+        //     })
+        //     ->orWhereHas('brand', function ($query) use ($request) {
+        //         $query->where('name', 'like', '%' . $request->input_item . '%');
+        //     })
+        //     ->whereWarehouse();
+
+        $keywords = explode(' ', $request->input_item);
+
+        $items_query = Item::where(function ($query) use ($keywords) {
+            foreach ($keywords as $keyword) {
+                $query->orWhere('description', 'like', "%{$keyword}%")
+                    ->orWhere('internal_id', 'like', "%{$keyword}%")
+                    ->orWhere('barcode', "{$keyword}")
+                    ->orWhereHas('category', function ($q) use ($keyword) {
+                        $q->where('name', 'like', '%' . $keyword . '%');
+                    })
+                    ->orWhereHas('brand', function ($q) use ($keyword) {
+                        $q->where('name', 'like', '%' . $keyword . '%');
+                    });
+            }
+        })->with(['warehouse_prices' => function ($q) use ($warehouse) {
+            $q->where('warehouse_id', $warehouse->id);
+        }])->whereWarehouse();
+
 
         if ($search_item_by_barcode_presentation) $items_query->orFilterItemUnitTypeBarcode($request->input_item);
 
@@ -442,6 +461,8 @@ class PosController extends Controller
             $whereItem[] = ['barcode', '=', $request->input_item];
             $whereItem[] = ['internal_id', 'like', '%' . $request->input_item . '%'];
             $whereExtra[] = ['name', 'like', '%' . $request->input_item . '%'];
+            // Añade una condición adicional para buscar en la descripción incluso si no coincide exactamente
+            $whereItem[] = ['description', 'like', '%' . str_replace(' ', '%', $request->input_item) . '%'];
         }
 
         foreach ($whereItem as $index => $wItem) {

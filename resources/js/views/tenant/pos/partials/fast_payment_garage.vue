@@ -312,6 +312,7 @@ export default {
             payments: [],
             locked_submit: false,
             loading_submit_cancel: false,
+            isCredit: false,
         }
     },
     watch: {
@@ -647,7 +648,7 @@ export default {
                 this.button_payment = false
                 this.difference = this.amount - this.form.total
             } else {
-                this.button_payment = true
+                this.button_payment = false
             }
             this.difference = _.round(this.difference, 2)
 
@@ -682,7 +683,7 @@ export default {
                 this.button_payment = false
                 this.difference = this.amount - this.form.total
             } else {
-                this.button_payment = true
+                this.button_payment = false
             }
             this.difference = _.round(this.difference, 2)
             // this.form_payment.payment = this.amount

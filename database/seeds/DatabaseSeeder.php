@@ -13,8 +13,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         App\Models\System\User::create([
-            'name' => 'Admin Instrador',
-            'email' => 'admin@gmail.com',
+            'name' => 'Administrador',
+            'email' => 'facturaya@gmail.com',
             'password' => bcrypt('123456'),
         ]);
  
@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
 
         App\Models\System\Plan::create([
             'name' => 'Ilimitado',
-            'pricing' =>  99,
+            'pricing' =>  60,
             'limit_users' => 0,
             'limit_documents' =>  0,
             'plan_documents' => [1,2,3,4],
