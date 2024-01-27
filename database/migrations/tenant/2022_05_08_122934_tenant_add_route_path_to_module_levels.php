@@ -78,6 +78,14 @@ class TenantAddRoutePathToModuleLevels extends Migration
                 'route_path' => '/purchases/create',
                 'description' => 'Nueva Compra'
             ]);
+        
+        DB::table('module_levels')
+            ->where('value', 'order-note')
+            ->update([
+                'route_path' => '/order-notes',
+                'label_menu' => 'PD',
+            ]);
+        
     }
 
     /**
