@@ -1,10 +1,8 @@
-## 5.4.0
-
-### docs
-2022-09-01 : docs | chalgelog update<br>
-
-
 ### fixed
+2024-01-27 : fixed | #116 | Permitir Venta al Credito En Venta Rapida<br>
+2024-01-27 : fixed | #116 | Arreglo de Busqueda de Productos en Venta Rapida<br>
+2024-01-27 : fixed | #116 | Actualizacion de Accesos Directos<br>
+2024-01-27 : fixed | #116 | Arreglar Columna extra Vacia mostrada en Kardex<br>
 2023-01-17 : fixed | #1233 | datos de lote no se muestran correctamente en guia de remision<br>
 2022-12-22 : fixed | #1146 | se modifica path de imagen en pdf<br>
 2022-12-22 : fixed | #887 | merge master<br>
